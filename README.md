@@ -19,7 +19,9 @@ Various utilities to help with your testing and deployment pipelines
 
 ```
 forge script script/DeployFundMe.s.sol --rpc-url $BAOBAB_RPC_URL --account $WALLET_NAME --sender $SENDER_ADDRESS --broadcast --gas-estimate-multiplier 200
-``
+```
+
+## Contract verification
 
 
 ## Foundry

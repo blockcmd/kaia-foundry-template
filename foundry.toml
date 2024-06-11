@@ -4,13 +4,14 @@ out = "out"
 libs = ["lib"]
 remappings = [
   "@bisonai/orakl-contracts/src/=lib/orakl/contracts/src/",
+  "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
 ]
+
 ffi = true
 fs_permissions = [
     { access = "read", path = "./broadcast" },
     { access = "read", path = "./reports" },
 ]
-
 
 [rpc_endpoints]
 kaia_kairos = "${KAIROS_RPC_URL}"
