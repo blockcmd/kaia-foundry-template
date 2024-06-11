@@ -1,3 +1,27 @@
+# Kaia Foundry Kit
+> Quickly bootstrap your development on Kaia
+
+## DevOps
+Various utilities to help with your testing and deployment pipelines
+### Anvil
+
+
+### Kaia testnet
+
+
+### Kaia mainnet
+
+
+## Useful library
+
+
+## Useful commands
+
+```
+forge script script/DeployFundMe.s.sol --rpc-url $BAOBAB_RPC_URL --account $WALLET_NAME --sender $SENDER_ADDRESS --broadcast --gas-estimate-multiplier 200
+``
+
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
@@ -9,55 +33,55 @@ Foundry consists of:
 -   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
 -   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
+### Foundry official documentation
 
 https://book.getfoundry.sh/
 
-## Usage
+### Usage
 
-### Build
+#### Build
 
 ```shell
 $ forge build
 ```
 
-### Test
+#### Test
 
 ```shell
 $ forge test
 ```
 
-### Format
+#### Format
 
 ```shell
 $ forge fmt
 ```
 
-### Gas Snapshots
+#### Gas Snapshots
 
 ```shell
 $ forge snapshot
 ```
 
-### Anvil
+#### Anvil
 
 ```shell
 $ anvil
 ```
 
-### Deploy
+#### Deploy
 
 ```shell
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
-### Cast
+#### Cast
 
 ```shell
 $ cast <subcommand>
 ```
 
-### Help
+#### Help
 
 ```shell
 $ forge --help
