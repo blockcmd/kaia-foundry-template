@@ -2,13 +2,18 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import { Counter } from "src/Counter.sol";
+import { DeployHelper } from "script/DeployHelper.s.sol";
+import { Deploy } from "script/Deploy.s.sol";
 
 contract CounterTest is Test {
     Counter public counter;
+    DeployHelper public deployHelper;
 
     function setUp() public {
-        counter = new Counter();
+        Deploy deployer = new Deploy();
+        (fundMe, helperConfig) = deployer.run();
+        counter = new Counter(42);
         counter.setNumber(0);
     }
 
