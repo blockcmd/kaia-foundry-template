@@ -7,16 +7,16 @@ library PriceConverter {
     function getPrice(IFeedProxy priceFeed) internal view returns (uint256) {
         (, int256 answer,) = priceFeed.latestRoundData();
         // ETH/USD rate in 18 digit
-        return uint256(answer * 10000000000);
+        return uint256(answer * 10 ** 10);
     }
 
     // 1000000000
     // call it get fiatConversionRate, since it assumes something about decimals
     // It wouldn't work for every aggregator
-    function getConversionRate(uint256 ethAmount, IFeedProxy priceFeed) internal view returns (uint256) {
-        uint256 ethPrice = getPrice(priceFeed);
-        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
+    function getConversionRate(uint256 klayAmount, IFeedProxy priceFeed) internal view returns (uint256) {
+        uint256 klayPrice = getPrice(priceFeed);
+        uint256 klayAmountInUsd = (klayPrice * klayAmount) / 10 ** 18;
         // the actual ETH/USD conversation rate, after adjusting the extra 0s.
-        return ethAmountInUsd;
+        return klayAmountInUsd;
     }
 }
