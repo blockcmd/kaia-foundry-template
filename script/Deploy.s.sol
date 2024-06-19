@@ -21,7 +21,7 @@ contract Deploy is Script {
         Counter counter = new Counter(startingNumber);
 
         /// @dev create a new Monee contract with the active network configuration
-        Monee monee = new Monee(0x6FaFF29226219756aa40CE648dbc65FB41DE5F72);
+        Monee monee = new Monee(0x000000000000000000000000000000000000dEaD);
 
         /// @dev stop the broadcast
         vm.stopBroadcast();
