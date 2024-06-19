@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.24;
 
-import {IAggregator} from "@bisonai/orakl-contracts/src/v0.1/interfaces/IAggregator.sol";
-import {VRFConsumerBase} from "@bisonai/orakl-contracts/src/v0.1/VRFConsumerBase.sol";
-import {IVRFCoordinator} from "@bisonai/orakl-contracts/src/v0.1/interfaces/IVRFCoordinator.sol";
-import {PriceConverter} from "./PriceConverter.sol";
-import {Monee} from "./MoneeToken.sol";
+import { IFeedProxy } from "@bisonai/orakl-contracts/v0.2/src/interfaces/IFeedProxy.sol";
+import { VRFConsumerBase } from "@bisonai/orakl-contracts/v0.1/src/VRFConsumerBase.sol";
+import { IVRFCoordinator } from "@bisonai/orakl-contracts/v0.1/src/interfaces/IVRFCoordinator.sol";
+import { PriceConverter } from "./PriceConverter.sol";
+import { Monee } from "./MoneeToken.sol";
 
 error LuckyDraw__InsufficientAmount();
 error LuckyDraw__OnlyOwnerCanWithdraw();
@@ -22,7 +22,7 @@ contract LuckyDraw is VRFConsumerBase {
     // Gas limit to use for VRF requests
     uint32 public callbackGasLimit = 300_000;
     // Data feed contract for KLAY-USDT
-    IAggregator private s_dataFeed;
+    IFeedProxy private s_dataFeed;
 
     using PriceConverter for uint256;
 
@@ -46,7 +46,7 @@ contract LuckyDraw is VRFConsumerBase {
         bytes32 _keyHash,
         uint64 _accountId
     ) VRFConsumerBase(_coordinator) {
-        s_dataFeed = IAggregator(_dataFeed);
+        s_dataFeed = IFeedProxy(_dataFeed);
         COORDINATOR = IVRFCoordinator(_coordinator);
         accountId = _accountId;
         keyHash = _keyHash;
@@ -62,7 +62,8 @@ contract LuckyDraw is VRFConsumerBase {
     }
 
     function suggestedAmount() public view returns (uint256) {
-        return PriceConverter.getPrice(s_dataFeed);
+        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
+        return MINIMUM_USD / currentPrice;
     }
 
     function requestRandomWords() public returns (uint256 requestId) {

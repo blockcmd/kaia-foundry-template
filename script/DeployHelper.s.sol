@@ -46,7 +46,7 @@ contract DeployHelper is Script {
         kairosNetworkConfig = NetworkConfig({
             startingNumber: 1001,
             /// @dev KLAY-USDT data feed address by Orakl on Kaia Kairos
-            dataFeed: 0x7c688130C185929eB5163CddC4681f357DB91Efb,
+            dataFeed: 0x1408cb13D84bA8Cb533FdF332db5D78290B071C9,
             /// @dev VRF Coordinator address by Orakl on Kaia Kairos
             coordinator: 0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499,
             /// @dev VRF Key Hash by Orakl on Kaia Kairos
