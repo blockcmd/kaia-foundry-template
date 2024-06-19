@@ -12,12 +12,21 @@ error LuckyDraw__OnlyOwnerCanWithdraw();
 error LuckyDraw_RequestNotFound();
 
 contract LuckyDraw is VRFConsumerBase {
+
+    // VRF Coordinator
     IVRFCoordinator COORDINATOR;
+    // Account ID to use for VRF requests
     uint64 private accountId;
+    // Key Hash to use for VRF requests
     bytes32 public keyHash;
+    // Gas limit to use for VRF requests
     uint32 public callbackGasLimit = 300_000;
-    uint256 public constant MINIMUM_USD = 1 * 10 ** 18;
+    // Data feed contract for KLAY-USDT
     IAggregator private s_dataFeed;
+
+    using PriceConverter for uint256;
+
+    uint256 public constant MINIMUM_USD = 1 * 10 ** 18;
     address private immutable i_owner;
     Monee private moneeToken;
     uint256 public lastRandomValue;
@@ -45,7 +54,7 @@ contract LuckyDraw is VRFConsumerBase {
     }
 
     function draw() public payable {
-        if (msg.value < MINIMUM_USD) {
+        if (msg.value.getConversionRate(s_dataFeed) < MINIMUM_USD) {
             revert LuckyDraw__InsufficientAmount();
         }
         requestRandomWords();
@@ -53,7 +62,9 @@ contract LuckyDraw is VRFConsumerBase {
     }
 
     function suggestedAmount() public view returns (uint256) {
-        return PriceConverter.getConversionRate(MINIMUM_USD, s_dataFeed);
+        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
+        uint256 amountSuggested = MINIMUM_USD / currentPrice;
+        return amountSuggested;
     }
 
     function requestRandomWords() public returns (uint256 requestId) {

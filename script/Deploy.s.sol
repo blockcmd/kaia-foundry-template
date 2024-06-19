@@ -8,7 +8,7 @@ import { Monee } from "../src/MoneeToken.sol";
 import { LuckyDraw } from "../src/LuckyDraw.sol";
 
 contract Deploy is Script {
-    function run() external returns (Counter, Monee, DeployHelper) {
+    function run() external returns (Counter, LuckyDraw, Monee, DeployHelper) {
         /// @dev initialize the DeployHelper contract
         DeployHelper deployHelper = new DeployHelper();
 
@@ -28,6 +28,6 @@ contract Deploy is Script {
         vm.stopBroadcast();
 
         /// @dev return the Counter and DeployHelper contracts
-        return (counter, monee, deployHelper);
+        return (counter, luckyDraw, monee, deployHelper);
     }
 }
