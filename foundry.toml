@@ -3,7 +3,7 @@ src = "src"
 out = "out"
 libs = ["lib"]
 remappings = [
-  "@bisonai/orakl-contracts/src/=lib/orakl/contracts/src/",
+  "@bisonai/orakl-contracts/=lib/orakl/contracts/",
   "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
 ]
 

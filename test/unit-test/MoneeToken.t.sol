@@ -12,6 +12,6 @@ contract CounterTest is Test {
 
     function setUp() public {
         Deploy deployer = new Deploy();
-        (,monee,) = deployer.run();
+        (,,monee,) = deployer.run();
     }
 }

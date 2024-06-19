@@ -12,7 +12,7 @@ contract CounterTest is Test {
 
     function setUp() public {
         Deploy deployer = new Deploy();
-        (counter,,) = deployer.run();
+        (counter,,,) = deployer.run();
     }
 
     function test_Increment() public {
