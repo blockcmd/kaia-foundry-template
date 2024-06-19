@@ -48,7 +48,7 @@ contract LuckyDraw is VRFConsumerBase {
         if (msg.value < MINIMUM_USD) {
             revert LuckyDraw__InsufficientAmount();
         }
-        uint256 requestId = requestRandomWords();
+        requestRandomWords();
         moneeToken.mint(msg.sender, lastRandomValue);
     }
 
