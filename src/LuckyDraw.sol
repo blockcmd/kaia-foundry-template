@@ -41,12 +41,12 @@ contract LuckyDraw is VRFConsumerBase {
     mapping(uint256 => RequestStatus) public s_requests;
 
     constructor(
-        address dataFeed,
+        address _dataFeed,
         address _coordinator,
         bytes32 _keyHash,
         uint64 _accountId
     ) VRFConsumerBase(_coordinator) {
-        s_dataFeed = IAggregator(dataFeed);
+        s_dataFeed = IAggregator(_dataFeed);
         COORDINATOR = IVRFCoordinator(_coordinator);
         accountId = _accountId;
         keyHash = _keyHash;
@@ -62,9 +62,7 @@ contract LuckyDraw is VRFConsumerBase {
     }
 
     function suggestedAmount() public view returns (uint256) {
-        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
-        uint256 amountSuggested = MINIMUM_USD / currentPrice;
-        return amountSuggested;
+        return PriceConverter.getPrice(s_dataFeed);
     }
 
     function requestRandomWords() public returns (uint256 requestId) {
