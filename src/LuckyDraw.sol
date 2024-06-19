@@ -34,14 +34,14 @@ contract LuckyDraw is VRFConsumerBase {
     constructor(
         address dataFeed,
         address _coordinator,
-        uint64 _accountId,
-        address _moneeToken
+        bytes32 _keyHash,
+        uint64 _accountId
     ) VRFConsumerBase(_coordinator) {
         s_dataFeed = IAggregator(dataFeed);
         COORDINATOR = IVRFCoordinator(_coordinator);
         accountId = _accountId;
+        keyHash = _keyHash;
         i_owner = msg.sender;
-        moneeToken = Monee(_moneeToken);
     }
 
     function draw() public payable {
@@ -49,7 +49,7 @@ contract LuckyDraw is VRFConsumerBase {
             revert LuckyDraw__InsufficientAmount();
         }
         uint256 requestId = requestRandomWords();
-        moneeToken.mint(msg.sender, requestId);
+        moneeToken.mint(msg.sender, lastRandomValue);
     }
 
     function suggestedAmount() public view returns (uint256) {
@@ -67,14 +67,17 @@ contract LuckyDraw is VRFConsumerBase {
 
     function fulfillRandomWords(
         uint256 _requestId,
-        uint256[] memory randomWords
+        uint256[] memory _randomWords
     ) internal override {
         // requestId should be checked if it matches the expected request.
         // Generate random value between 1 and 50.
         if (s_requests[_requestId].exists != false) {
             revert LuckyDraw_RequestNotFound();
         }
-        lastRandomValue = (randomWords[0] % 50) + 1;
+        s_requests[_requestId].fulfilled = true;
+        s_requests[_requestId].randomWords = _randomWords;
+        emit RequestFulfilled(_requestId, _randomWords);
+        lastRandomValue = (_randomWords[0] % 50) + 1;
     }
 
     function withdraw() public {
