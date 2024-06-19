@@ -19,9 +19,10 @@ contract LuckyDraw is VRFConsumerBase {
     // Key Hash to use for VRF requests
     bytes32 public keyHash;
     // Gas limit to use for VRF requests
-    uint32 public callbackGasLimit = 300_000;
+    uint32 public callbackGasLimit = 2_000_000;
     // Data feed contract for KLAY-USDT
     IFeedProxy private s_dataFeed;
+    uint256 private numWords = 1;
 
     uint256 public requestId;
 
@@ -29,17 +30,8 @@ contract LuckyDraw is VRFConsumerBase {
 
     uint256 public constant MINIMUM_USD = 1 * 10 ** 18;
     address private immutable i_owner;
-    Monee private moneeToken;
+    Monee public moneeToken;
     uint256 public lastRandomValue;
-    event RequestSent(uint256 requestId, uint32 numWords);
-    event RequestFulfilled(uint256 requestId, uint256[] randomWords);
-
-    struct RequestStatus {
-        bool fulfilled; // whether the request has been successfully fulfilled
-        bool exists; // whether a requestId exists
-        uint256[] randomWords;
-    }
-    mapping(uint256 => RequestStatus) public s_requests;
 
     constructor(
         address _dataFeed,
@@ -54,30 +46,23 @@ contract LuckyDraw is VRFConsumerBase {
         i_owner = msg.sender;
     }
 
-    function draw() public payable returns (uint256){
-        if (msg.value.getConversionRate(s_dataFeed) < MINIMUM_USD) {
-            revert LuckyDraw__InsufficientAmount();
-        }
-        requestId = requestRandomWords(keyHash, accountId, callbackGasLimit, 1);
-        return requestId;
-    }
-
     function suggestedAmount() public view returns (uint256) {
         uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
         return MINIMUM_USD / currentPrice;
     }
 
-    function requestRandomWords(
-        bytes32 _keyHash,
-        uint64 _accountId,
-        uint32 _callbackGasLimit,
-        uint32 _numWords
-    ) public returns (uint256 _requestId) {
-        _requestId = COORDINATOR.requestRandomWords(
-            _keyHash,
-            _accountId,
-            _callbackGasLimit,
-            _numWords
+    function setMoneeToken(address _moneeToken) public {
+        require(msg.sender == i_owner, "LuckyDraw__OnlyOwnerCanSetMoneeToken");
+        moneeToken = Monee(_moneeToken);
+    }
+
+
+    function requestRandomWords() public returns (uint256) {
+        return COORDINATOR.requestRandomWords(
+            keyHash,
+            accountId,
+            callbackGasLimit,
+            1
         );
     }
 
@@ -87,11 +72,9 @@ contract LuckyDraw is VRFConsumerBase {
     ) internal override {
         // requestId should be checked if it matches the expected request.
         // Generate random value between 1 and 50.
-        if (_requestId != requestId) {
-            revert LuckyDraw_RequestNotFound();
-        }
+        requestId = _requestId;
         lastRandomValue = (_randomWords[0] % 50) + 1;
-        moneeToken.mint(0x6FaFF29226219756aa40CE648dbc65FB41DE5F72, lastRandomValue);
+        moneeToken.mint(0x6FaFF29226219756aa40CE648dbc65FB41DE5F72, lastRandomValue * 10 ** 18);
     }
 
     function withdraw() public {
