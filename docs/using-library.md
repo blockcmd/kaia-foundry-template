@@ -12,13 +12,25 @@ A library for secure smart contract development. Build on a solid foundation of 
 - Interactive widget to create popular standards like ERC20, ERC721, KIP7, KIP17, etc.
 
 ## Installation
-OpenZeppelin contracts
+### OpenZeppelin contracts
+Use this command to install OpenZeppelin contracts
 ```bash
 forge install OpenZeppelin/openzeppelin-contracts
 ```
 
-Kaiachain contracts
+Then add the following line to your `remappings.txt` file:
+```
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+```
+
+### Kaiachain contracts
+Use this command to install Kaiachain contracts
 ```bash
 forge install kaiachain/kaia-contracts
+```
+
+Then add the following line to your `remappings.txt` file:
+```
+@kaiachain/contracts/=lib/kaia-contracts/contracts/
 ```
 
