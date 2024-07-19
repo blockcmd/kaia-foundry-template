@@ -13,6 +13,3 @@
 [submodule "lib/kaia-contracts"]
 	path = lib/kaia-contracts
 	url = https://github.com/kaiachain/kaia-contracts
-[submodule "lib/pyth-sdk-solidity"]
-	path = lib/pyth-sdk-solidity
-	url = https://github.com/pyth-network/pyth-sdk-solidity
