@@ -11,7 +11,7 @@ A library for secure smart contract development. Build on a solid foundation of 
 - [Kaiachain wizard](https://wizard.kaia.io/)
 - Interactive widget to create popular standards like ERC20, ERC721, KIP7, KIP17, etc.
 
-## Commands to run
+## Installation
 OpenZeppelin contracts
 ```bash
 forge install OpenZeppelin/openzeppelin-contracts

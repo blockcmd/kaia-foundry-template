@@ -13,6 +13,3 @@
 [submodule "lib/kaia-contracts"]
 	path = lib/kaia-contracts
 	url = https://github.com/kaiachain/kaia-contracts
-[submodule "lib/pyth-crosschain"]
-	path = lib/pyth-crosschain
-	url = https://github.com/pyth-network/pyth-crosschain
