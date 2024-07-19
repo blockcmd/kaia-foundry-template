@@ -1,17 +1,37 @@
 [profile.default]
 src = "src"
 out = "out"
+script = "script"
 libs = ["lib"]
+auto_detect_solc = false
+bytecode_hash = "none"
+evm_version = "shanghai"
+fuzz = { runs = 1_000 }
+gas_reports = ["*"]
+optimizer = true
+optimizer_runs = 200
+solc = "0.8.25"
 
-remappings = [
-    "@bisonai/orakl-contracts/=lib/orakl/contracts/",
-    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
-]
-
+ffi = true
 fs_permissions = [
     { access = "read", path = "./broadcast" },
     { access = "read", path = "./reports" },
 ]
+
+[profile.ci]
+fuzz = { runs = 10_000 }
+verbosity = 4
+
+[fmt]
+bracket_spacing = true
+int_types = "long"
+line_length = 120
+multiline_func_header = "all"
+number_underscore = "thousands"
+quote_style = "double"
+tab_width = 4
+wrap_comments = true
+
 
 [rpc_endpoints]
 kairos_testnet = "${KAIROS_TESTNET_RPC_URL}"
