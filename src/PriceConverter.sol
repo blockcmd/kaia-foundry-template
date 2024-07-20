@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // 1. Pragma
 pragma solidity ^0.8.19;
-import { IFeedProxy } from "@bisonai/orakl-contracts/v0.2/src/interfaces/IFeedProxy.sol";
+import { IFeedProxy } from "lib/orakl/contracts/v0.2/src/interfaces/IFeedProxy.sol";
 
 library PriceConverter {
     function getPrice(IFeedProxy priceFeed) internal view returns (uint256) {

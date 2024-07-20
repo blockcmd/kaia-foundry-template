@@ -2,12 +2,13 @@
 pragma solidity ^0.8.4;
 
 import "@kaiachain/contracts/KIP/token/KIP7/KIP7.sol";
-import "@kaiachain/contracts/access/Ownable.sol";
+import "lib/kaia-contracts/contracts/access/Ownable.sol";
 
 /// @title TokenKIP7
 /// @author BlockCMD
 /// @notice A simple KIP7 token that can be minted by its owner
 contract TokenKIP7 is KIP7, Ownable {
+    
     /// -----------------------------------------------------------------------
     /// Constructor
     /// -----------------------------------------------------------------------

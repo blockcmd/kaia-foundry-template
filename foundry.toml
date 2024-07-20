@@ -17,6 +17,14 @@ fs_permissions = [
     { access = "read", path = "./reports" },
 ]
 
+remappings = [
+    "forge-std/=lib/forge-std/src/",
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "@kaiachain/contracts/=lib/kaia-contracts/contracts/",
+    "@pythnetwork/pyth-sdk-solidity/=node_modules/@pythnetwork/pyth-sdk-solidity/",
+    "@bisonai/orakl-contracts/=lib/orakl/contracts/",
+]
+
 [profile.ci]
 fuzz = { runs = 10_000 }
 verbosity = 4
