@@ -3,7 +3,6 @@ pragma solidity ^0.8.19;
 
 import { Script } from "forge-std/Script.sol";
 import { DeployHelper } from "./DeployHelper.s.sol";
-import { Counter } from "src/Counter.sol";
 import { TokenERC20 } from "src/TokenERC20.sol";
 import { LuckyDraw } from "../src/LuckyDraw.sol";
 
