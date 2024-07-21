@@ -1,5 +1,10 @@
-forge-std/=lib/forge-std/src/
 @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
-@kaiachain/contracts/=lib/kaia-contracts/contracts/
-@pythnetwork/pyth-sdk-solidity/=node_modules/@pythnetwork/pyth-sdk-solidity/
-@bisonai/orakl-contracts/=lib/orakl/contracts/
+@pythnetwork/=node_modules/@pythnetwork/
+ds-test/=lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
+forge-std/=lib/forge-std/src/
+foundry-devops/=lib/foundry-devops/
+kaia-contracts/=lib/kaia-contracts/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+orakl/=lib/orakl/
+solidity-stringutils/=lib/orakl/contracts/v0.2/lib/solidity-stringutils/

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity 0.8.25;
 
-import "@kaiachain/contracts/KIP/token/KIP7/KIP7.sol";
-import "@kaiachain/contracts/access/Ownable.sol";
+import "kaia-contracts/contracts/KIP/token/KIP7/KIP7.sol";
+import "kaia-contracts/contracts/access/Ownable.sol";
 
 /// @title TokenKIP7
 /// @author BlockCMD
