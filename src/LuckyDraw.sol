@@ -54,6 +54,7 @@ contract LuckyDraw is VRFConsumerBase {
     /// -----------------------------------------------------------------------
     error LuckyDraw__InsufficientAmount();
     error LuckyDraw__OnlyOwnerCanWithdraw();
+    error LuckyDraw__OnlyOwnerCanSetERC20Token();
     error LuckyDraw_RequestNotFound();
 
     /// -----------------------------------------------------------------------
@@ -72,11 +73,6 @@ contract LuckyDraw is VRFConsumerBase {
         accountId = _accountId;
         keyHash = _keyHash;
         i_owner = msg.sender;
-    }
-
-    function suggestedAmount() public view returns (uint256) {
-        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
-        return MINIMUM_USD / currentPrice;
     }
 
     /// -----------------------------------------------------------------------
@@ -128,4 +124,8 @@ contract LuckyDraw is VRFConsumerBase {
     /// -----------------------------------------------------------------------
     /// Getters
     /// -----------------------------------------------------------------------
+    function suggestedAmount() public view returns (uint256) {
+        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
+        return MINIMUM_USD / currentPrice;
+    }
 }

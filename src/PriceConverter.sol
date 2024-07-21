@@ -10,7 +10,7 @@ import { IFeedProxy } from "lib/orakl/contracts/v0.2/src/interfaces/IFeedProxy.s
 library PriceConverter {
     /// @notice Fetch the price of KLAY in USD from Orakl Network price feed
     /// @param priceFeed The address of the price feed contract
-    /// @return uint256 The KLAY/USD exchange rate in 18 digit
+    /// @return price The KLAY/USD exchange rate in 18 digit
     function getPrice(IFeedProxy priceFeed) internal view returns (uint256 price) {
         (, int256 answer,) = priceFeed.latestRoundData(); // 8 digits
         price = uint256(answer * 10 ** 10); // 18 digits
@@ -31,7 +31,7 @@ library PriceConverter {
     {
         uint256 klayPrice = getPrice(priceFeed);
         klayAmountInUsd = (klayPrice * klayAmount) / 10 ** 18;
-        // the actual KLAY/USD conversation rate, after adjusting the extra 0s.
+        // the actual KLAY/USD conversation rate, after adjusting the extra 0s to be in wei unit.
         return klayAmountInUsd;
     }
 }
