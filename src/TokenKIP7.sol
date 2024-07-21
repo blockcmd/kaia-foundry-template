@@ -13,8 +13,7 @@ contract TokenKIP7 is KIP7, Ownable {
     /// -----------------------------------------------------------------------
 
     /// @notice Constructor to declare token name, symbol and initialOwner
-    /// @param initialOwner The privillege account of the token
-    constructor(address initialOwner) KIP7("Token KIP7", "TKIP7") Ownable() { }
+    constructor() KIP7("Token KIP7", "TKIP7") Ownable() { }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return super.supportsInterface(interfaceId);

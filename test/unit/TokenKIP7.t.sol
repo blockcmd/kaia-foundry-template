@@ -12,7 +12,8 @@ contract TokenKIP7Test is StdCheats, Test {
     address public constant SPENDER = address(2);
 
     function setUp() public {
-        tokenKIP7 = new TokenKIP7(USER);
+        vm.prank(USER);
+        tokenKIP7 = new TokenKIP7();
     }
 
     function test_Owner() public view {
