@@ -11,5 +11,5 @@ npm install @pythnetwork/pyth-sdk-solidity
 
 Then add the following line to your `remappings.txt` file:
 ```
-@pythnetwork/pyth-sdk-solidity/=node_modules/@pythnetwork/pyth-sdk-solidity
+@pythnetwork/=node_modules/@pythnetwork/
 ```

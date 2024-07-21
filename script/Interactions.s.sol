@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import { Script, console } from "forge-std/Script.sol";
 import { LuckyDraw } from "src/LuckyDraw.sol";
-import { IPrepayment } from "@bisonai/orakl-contracts/v0.1/src/interfaces/IPrepayment.sol";
+import { IPrepayment } from "orakl/contracts/v0.1/src/interfaces/IPrepayment.sol";
 import { DevOpsTools } from "lib/foundry-devops/src/DevOpsTools.sol";
 
 contract DrawLuckyDraw is Script {

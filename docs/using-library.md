@@ -31,6 +31,15 @@ forge install kaiachain/kaia-contracts
 
 Then add the following line to your `remappings.txt` file:
 ```
-@kaiachain/contracts/=lib/kaia-contracts/contracts/
+kaia-contracts/=lib/kaia-contracts/
 ```
 
+### Troubleshooting
+Very often your import paths will have issues. You can try using this command to troubleshoot.
+```bash
+forge remappings > remappings.txt
+```
+
+After running the command, check all your files, make changes in the `remappings.txt` or in your `.sol` files if necessary. 
+
+If everything fails, just use absolute path, which is refering directly from `lib/path/to/file`
