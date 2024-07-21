@@ -11,9 +11,10 @@ library PriceConverter {
     /// @notice Fetch the price of KLAY in USD from Orakl Network price feed
     /// @param priceFeed The address of the price feed contract
     /// @return uint256 The KLAY/USD exchange rate in 18 digit
-    function getPrice(IFeedProxy priceFeed) internal view returns (uint256) {
+    function getPrice(IFeedProxy priceFeed) internal view returns (uint256 price) {
         (, int256 answer,) = priceFeed.latestRoundData(); // 8 digits
-        return uint256(answer * 10 ** 10); // 18 digits
+        price = uint256(answer * 10 ** 10); // 18 digits
+        return price; // 18 digits
     }
 
     /// @notice Convert the KLAY amount to USD amount
