@@ -7,9 +7,12 @@ import { IVRFCoordinator } from "@bisonai/orakl-contracts/v0.1/src/interfaces/IV
 import { PriceConverter } from "src/PriceConverter.sol";
 import { TokenERC20 } from "src/TokenERC20.sol";
 
+/// @title LuckyDraw
+/// @author BlockCMD
+/// @notice A Lucky Draw contract that mints a random amount of ERC20 token to the caller using Orakl Network
 contract LuckyDraw is VRFConsumerBase {
     /// -----------------------------------------------------------------------
-    /// Storage variables
+    /// Oracle variables
     /// -----------------------------------------------------------------------
     // VRF Coordinator
     IVRFCoordinator COORDINATOR;
@@ -21,19 +24,30 @@ contract LuckyDraw is VRFConsumerBase {
     uint32 public callbackGasLimit = 2_000_000;
     // Data feed contract for KLAY-USDT
     IFeedProxy private s_dataFeed;
+    // Number of words to request
     uint256 private numWords = 1;
 
-    uint256 public requestId;
+    /// -----------------------------------------------------------------------
+    /// State variables
+    /// -----------------------------------------------------------------------
+    uint256 private requestId;
+    TokenERC20 public tokenERC20;
+    uint256 public lastRandomValue;
 
     /// -----------------------------------------------------------------------
     /// Library usage
     /// -----------------------------------------------------------------------
     using PriceConverter for uint256;
 
+    /// -----------------------------------------------------------------------
+    /// Constant variables
+    /// -----------------------------------------------------------------------
     uint256 public constant MINIMUM_USD = 1 * 10 ** 18;
+
+    /// -----------------------------------------------------------------------
+    /// Immutable variables
+    /// -----------------------------------------------------------------------
     address private immutable i_owner;
-    TokenERC20 public tokenERC20;
-    uint256 public lastRandomValue;
 
     /// -----------------------------------------------------------------------
     /// Errors
@@ -110,4 +124,8 @@ contract LuckyDraw is VRFConsumerBase {
         lastRandomValue = (_randomWords[0] % 50) + 1;
         tokenERC20.mint(0x6FaFF29226219756aa40CE648dbc65FB41DE5F72, lastRandomValue * 10 ** 18);
     }
+
+    /// -----------------------------------------------------------------------
+    /// Getters
+    /// -----------------------------------------------------------------------
 }
