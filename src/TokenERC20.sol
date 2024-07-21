@@ -14,16 +14,16 @@ contract TokenERC20 is ERC20, Ownable {
     /// -----------------------------------------------------------------------
 
     /// @notice Constructor to declare token name, symbol and initialOwner
-    /// @param initialOwner The amount of underlying tokens to wrap
+    /// @param initialOwner The privillege account of the token
     constructor(address initialOwner) ERC20("Token ERC20", "TERC20") Ownable(initialOwner) { }
 
     /// -----------------------------------------------------------------------
     /// User actions
     /// -----------------------------------------------------------------------
 
-    /// @notice Mints wrapped tokens using underlying tokens. Can only be called before the vest is over.
-    /// @param to The amount of underlying tokens to wrap
-    /// @param amount The amount of wrapped tokens to mint
+    /// @notice Mints new tokens to the specified address
+    /// @param to The address to mint tokens to
+    /// @param amount The amount of tokens to mint
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }

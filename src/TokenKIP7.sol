@@ -13,7 +13,7 @@ contract TokenKIP7 is KIP7, Ownable {
     /// -----------------------------------------------------------------------
 
     /// @notice Constructor to declare token name, symbol and initialOwner
-    /// @param initialOwner The amount of underlying tokens to wrap
+    /// @param initialOwner The privillege account of the token
     constructor(address initialOwner) KIP7("Token KIP7", "TKIP7") Ownable() { }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
@@ -24,9 +24,9 @@ contract TokenKIP7 is KIP7, Ownable {
     /// User actions
     /// -----------------------------------------------------------------------
 
-    /// @notice Mints wrapped tokens using underlying tokens. Can only be called before the vest is over.
-    /// @param to The amount of underlying tokens to wrap
-    /// @param amount The amount of wrapped tokens to mint
+    /// @notice Mints new tokens to the specified address
+    /// @param to The address to mint tokens to
+    /// @param amount The amount of tokens to mint
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
