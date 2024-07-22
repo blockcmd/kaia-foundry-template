@@ -4,9 +4,8 @@ pragma solidity 0.8.25;
 
 import { TokenKIP7 } from "src/TokenKIP7.sol";
 import { Test, console } from "forge-std/Test.sol";
-import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract TokenKIP7Test is StdCheats, Test {
+contract TokenKIP7Test is Test {
     TokenKIP7 public tokenKIP7;
     address public constant USER = address(1);
     address public constant SPENDER = address(2);

@@ -14,3 +14,6 @@ deploy-kaia:
 
 interact-kairos:
 	forge script script/Interactions.s.sol --rpc-url ${KAIROS_TESTNET_RPC_URL} --account dev --sender ${SENDER} --broadcast --gas-estimate-multiplier 200 -vvvv
+
+create3-address:
+	forge script script/CREATE3Deploy.s.sol --rpc-url ${KAIROS_TESTNET_RPC_URL} --account dev --sender ${SENDER} --broadcast --gas-estimate-multiplier 200 -vvvv
