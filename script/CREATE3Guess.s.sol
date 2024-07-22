@@ -11,7 +11,7 @@ contract CREATE3Guess is Script {
         /// testnet
         address create3FactoryAddress = 0x6aA3D87e99286946161dCA02B97C5806fC5eD46F;
 
-        /// @dev declare the address of the deployer
+        /// @dev declare the address of the deployer. Change this address to your address
         address DEPLOYER = 0x6FaFF29226219756aa40CE648dbc65FB41DE5F72;
 
         /// @dev initialize the ICREATE3Factory interface

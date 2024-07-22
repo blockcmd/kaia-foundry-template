@@ -33,6 +33,8 @@ Then add the following line to your `remappings.txt` file:
 ```
 kaia-contracts/=lib/kaia-contracts/
 ```
+> [!WARNING]  
+> KIP tokens have slightly different behaviours from ERC tokens. Please review the imported contracts.
 
 ### Troubleshooting
 Very often your import paths will have issues. You can try using this command to troubleshoot.
