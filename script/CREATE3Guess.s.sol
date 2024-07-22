@@ -10,21 +10,26 @@ contract CREATE3Guess is Script {
         /// @dev declare the address of the CREATE3Factory contract. The address is the same for Kaia mainnet and
         /// testnet
         address create3FactoryAddress = 0x6aA3D87e99286946161dCA02B97C5806fC5eD46F;
+
+        /// @dev declare the address of the deployer
         address DEPLOYER = 0x6FaFF29226219756aa40CE648dbc65FB41DE5F72;
+
         /// @dev initialize the ICREATE3Factory interface
         ICREATE3Factory create3Factory = ICREATE3Factory(create3FactoryAddress);
 
         /// @dev start the broadcast
         vm.startBroadcast();
 
-        /// @dev create a new Monee contract with the active network configuration
-        // bytes memory creationCode = type(TokenERC20).creationCode;
-
+        /// @dev the salt is the bytes32 of the string "counter"
         bytes32 salt = bytes32(abi.encodePacked("counter"));
+
+        /// @dev call the getDeployed function of the CREATE3Factory contract to get the predicted deployment address
         predictedDeploymentAddress = create3Factory.getDeployed(DEPLOYER, salt);
+
         /// @dev stop the broadcast
         vm.stopBroadcast();
-        /// @dev return the Counter and DeployHelper contracts
+
+        /// @dev return the predictedDeploymentAddress
         return predictedDeploymentAddress;
     }
 }
