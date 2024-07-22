@@ -1,9 +1,18 @@
 # Deployments
 
-## Introduction
+## Introduction to solidity scripting
+Quoted from the [Foundry book](https://book.getfoundry.sh/tutorials/solidity-scripting)
 
+> Solidity scripting is a way to declaratively deploy contracts using Solidity, instead of using the more limiting and less user friendly forge create.
+> 
+> Solidity scripts are like the scripts you write when working with tools like Hardhat; what makes Solidity scripting different is that they are written in Solidity instead of JavaScript, and they are run on the fast Foundry EVM backend, which provides dry-run capabilities.
 
 ## Usage of solidity scripting
+To make deployment easy on mainnet, testnet and anvil (local), you can leverage Solidity scripting in Foundry to inject variables based on the environment for deployment.
+
+This template includes `Deploy.s.sol` and `DeployHelper.s.sol` for your review. The `DeployHelper.s.sol` file contains the constructor configuration for Orakl Network VRF and price feed proxy on Kaia Mainnet, Kairos testnet and mock for Anvil (local).
+
+When you run `make deploy-kairos` or `make deploy-kaia`, Foundry will execute the script `Deploy.s.sol` which takes in the correct configuration parameters from `DeployHelper.s.sol` and pass into the constructor arguments. This reduces human error during deployment process, especially if your contracts have to interact with external contracts with different addresses for mainnet and testnet.
 
 ## CREATE3 deployment
 ### About CREATE3
