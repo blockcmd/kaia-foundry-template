@@ -17,14 +17,19 @@ contract CREATE3Deploy is Script {
         /// @dev start the broadcast
         vm.startBroadcast();
 
-        /// @dev create a new Monee contract with the active network configuration
+        /// @dev get the creation code of the Counter contract
         bytes memory creationCode = type(Counter).creationCode;
 
+        /// @dev the salt is the bytes32 of the string "counter"
         bytes32 salt = bytes32(abi.encodePacked("counter"));
+
+        /// @dev call the deploy function of the CREATE3Factory contract to deploy the Counter contract with the salt
         counterAddress = create3Factory.deploy(salt, creationCode);
+
         /// @dev stop the broadcast
         vm.stopBroadcast();
-        /// @dev return the Counter and DeployHelper contracts
+
+        /// @dev return the counterAddress
         return counterAddress;
     }
 }
