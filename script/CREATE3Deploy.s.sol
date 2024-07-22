@@ -4,10 +4,9 @@ pragma solidity ^0.8.19;
 import { Script } from "forge-std/Script.sol";
 import { DeployHelper } from "./DeployHelper.s.sol";
 import { TokenERC20 } from "src/TokenERC20.sol";
-import { LuckyDraw } from "../src/LuckyDraw.sol";
 
 contract Deploy is Script {
-    function run() external returns (LuckyDraw, TokenERC20, DeployHelper) {
+    function run() external returns (TokenERC20, DeployHelper) {
         /// @dev initialize the DeployHelper contract
         DeployHelper deployHelper = new DeployHelper();
 
@@ -17,7 +16,6 @@ contract Deploy is Script {
         /// @dev start the broadcast
         vm.startBroadcast();
 
-        LuckyDraw luckyDraw = new LuckyDraw(dataFeed, coordinator, keyHash, accountId);
         /// @dev create a new Monee contract with the active network configuration
         TokenERC20 tokenERC20 = new TokenERC20(address(luckyDraw));
 
