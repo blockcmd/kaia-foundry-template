@@ -13,3 +13,6 @@
 [submodule "lib/kaia-contracts"]
 	path = lib/kaia-contracts
 	url = https://github.com/kaiachain/kaia-contracts
+[submodule "lib/create3-factory"]
+	path = lib/create3-factory
+	url = https://github.com/zeframlou/create3-factory
