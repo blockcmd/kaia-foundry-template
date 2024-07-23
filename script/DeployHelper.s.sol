@@ -11,6 +11,7 @@ contract DeployHelper is Script {
         address coordinator;
         bytes32 keyHash;
         uint64 accountId;
+        address pythDataFeed;
     }
 
     /// @dev declare a variable to store the network configuration
@@ -48,7 +49,9 @@ contract DeployHelper is Script {
             /// @dev VRF Key Hash by Orakl on Kaia Kairos
             keyHash: 0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c,
             /// @dev Account ID for VRF Coordinator on Kaia Kairos
-            accountId: 777
+            accountId: 777,
+            /// @dev Pyth data feed address by Pyth Network on Kaia Kairos
+            pythDataFeed: 0x2880aB155794e7179c9eE2e38200202908C17B43
         });
     }
 
@@ -61,7 +64,9 @@ contract DeployHelper is Script {
             /// @dev VRF Key Hash by Orakl on Kaia Mainnet
             keyHash: 0x6cff5233743b3c0321a19ae11ab38ae0ddc7ddfe1e91b162fa8bb657488fb157,
             /// @dev Account ID for VRF Coordinator on Kaia Mainnet
-            accountId: 777
+            accountId: 777,
+            /// @dev Pyth data feed address by Pyth Network on Kaia Mainnet
+            pythDataFeed: 0x2880aB155794e7179c9eE2e38200202908C17B43
         });
     }
 
@@ -90,7 +95,8 @@ contract DeployHelper is Script {
             dataFeed: address(mockDataFeed),
             coordinator: 0xDA8c0A00A372503aa6EC80f9b29Cc97C454bE499,
             keyHash: 0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c,
-            accountId: 777
+            accountId: 777,
+            pythDataFeed: 0x2880aB155794e7179c9eE2e38200202908C17B43
         });
     }
 }

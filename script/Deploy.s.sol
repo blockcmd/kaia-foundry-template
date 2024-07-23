@@ -12,7 +12,8 @@ contract Deploy is Script {
         DeployHelper deployHelper = new DeployHelper();
 
         /// @dev get the active network configuration using the DeployHelper contract
-        (address dataFeed, address coordinator, bytes32 keyHash, uint64 accountId) = deployHelper.activeNetworkConfig();
+        (address dataFeed, address coordinator, bytes32 keyHash, uint64 accountId, address pythDataFeed) =
+            deployHelper.activeNetworkConfig();
 
         /// @dev start the broadcast
         vm.startBroadcast();
