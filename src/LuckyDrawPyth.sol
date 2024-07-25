@@ -4,8 +4,10 @@ pragma solidity ^0.8.24;
 import { IFeedProxy } from "lib/orakl/contracts/v0.2/src/interfaces/IFeedProxy.sol";
 import { VRFConsumerBase } from "lib/orakl/contracts/v0.1/src/VRFConsumerBase.sol";
 import { IVRFCoordinator } from "lib/orakl/contracts/v0.1/src/interfaces/IVRFCoordinator.sol";
-import { PriceConverter } from "src/PriceConverter.sol";
+import { PriceConverter } from "src/PriceConverterPyth.sol";
 import { TokenERC20 } from "src/TokenERC20.sol";
+import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
+
 
 /// @title LuckyDraw
 /// @author BlockCMD
@@ -24,6 +26,11 @@ contract LuckyDraw is VRFConsumerBase {
     uint32 public callbackGasLimit = 2_000_000;
     // Data feed contract for KLAY-USDT
     IFeedProxy private s_dataFeed;
+
+    // s_feedId = 0xde5e6ef09931fecc7fdd8aaa97844e981f3e7bb1c86a6ffc68e9166bb0db3743; KLAY/USD
+    // The complete list of feed IDs is available at https://pyth.network/developers/price-feed-ids
+    bytes32 private s_feedId;
+
     // Number of words to request
     uint256 private numWords = 1;
 
@@ -49,6 +56,10 @@ contract LuckyDraw is VRFConsumerBase {
     /// -----------------------------------------------------------------------
     address private immutable i_owner;
 
+    struct PriceFeed {
+        bytes32 id;
+    }
+
     /// -----------------------------------------------------------------------
     /// Errors
     /// -----------------------------------------------------------------------
@@ -64,11 +75,13 @@ contract LuckyDraw is VRFConsumerBase {
         address _dataFeed,
         address _coordinator,
         bytes32 _keyHash,
-        uint64 _accountId
+        uint64 _accountId,
+        bytes32 feedId
     )
         VRFConsumerBase(_coordinator)
     {
         s_dataFeed = IFeedProxy(_dataFeed);
+        s_feedId = feedId;
         COORDINATOR = IVRFCoordinator(_coordinator);
         accountId = _accountId;
         keyHash = _keyHash;
@@ -124,8 +137,8 @@ contract LuckyDraw is VRFConsumerBase {
     /// -----------------------------------------------------------------------
     /// Getters
     /// -----------------------------------------------------------------------
-    function suggestedAmount() public view returns (uint256) {
-        uint256 currentPrice = PriceConverter.getPrice(s_dataFeed);
+    function suggestedAmount(bytes[] calldata priceUpdate) public returns (uint256) {
+        uint256 currentPrice = PriceConverter.getPrice(s_feedId, address(s_dataFeed), priceUpdate);
         return MINIMUM_USD / currentPrice;
     }
 }

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+// A price feed address manager to fetch the price feed address of token pairs on the ORAKL NETWORK.
 contract PriceFeedManager {
 
     struct FeedAddresses {
@@ -12,7 +13,7 @@ contract PriceFeedManager {
 
     mapping (string => FeedAddresses) public FeedAddressLookUp;
 
-    error PriceFeedAddressManager__PriceFeedAddressNotFound();
+    error PriceFeedAddressManager__PriceFeedAddressNotFound(string err);
     
     constructor() {
     if(block.chainid == 1001) {
@@ -219,7 +220,7 @@ contract PriceFeedManager {
     FeedAddressLookUp["ZRO-KRW"].CypressFeedAddress = 0x5536Eb1B6B1e182c74ee2464357db48186693F81;
     FeedAddressLookUp["UNI-USDT"].CypressFeedAddress = 0x0c523429A32E8597C3bfF73923d24F4c0b566AfE;
     } else {
-        revert PriceFeedAddressManager__PriceFeedAddressNotFound();
+        revert PriceFeedAddressManager__PriceFeedAddressNotFound("Invalid Chain ID");
     }
     }
 

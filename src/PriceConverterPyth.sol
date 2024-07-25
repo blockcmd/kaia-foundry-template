@@ -14,7 +14,7 @@ library PriceConverter {
     /// @param priceFeed The address of the price feed contract
     /// @param priceUpdate The new price update
     /// @return price The KLAY/USD exchange rate in 18 digit
-    function getPrice(PythStructs.PriceFeed memory feedId, address priceFeed, bytes[] calldata priceUpdate) internal returns (uint256) {
+    function getPrice(bytes32 feedId, address priceFeed, bytes[] calldata priceUpdate) internal returns (uint256) {
         // Submit a priceUpdate to the Pyth contract to update the on-chain price.
         // Updating the price requires paying the fee returned by getUpdateFee.
         // WARNING: These lines are required to ensure the getPrice call below succeeds. If you remove them,
@@ -28,7 +28,7 @@ library PriceConverter {
         // The complete list of feed IDs is available at https://pyth.network/developers/price-feed-ids
         // priceFeed.id = ; // KLAY/USD
         // priceFeedId = 0xde5e6ef09931fecc7fdd8aaa97844e981f3e7bb1c86a6ffc68e9166bb0db3743;
-        PythStructs.Price memory Newprice = pyth.getPrice(feedId.id);
+        PythStructs.Price memory Newprice = pyth.getPrice(feedId);
         return (uint256(uint64(Newprice.price)) * 10 ** 10);
     }
 
@@ -36,7 +36,7 @@ library PriceConverter {
     /// @param klayAmount The amount of KLAY to convert
     /// @param feedId The address of the price feed contract
     /// @return klayAmountInUsd The amount of KLAY in USD
-    function getConversionRate(PythStructs.PriceFeed memory feedId, uint klayAmount, address priceFeed, bytes[] calldata priceUpdate) internal returns (uint256 klayAmountInUsd) {
+    function getConversionRate(bytes32 feedId, uint klayAmount, address priceFeed, bytes[] calldata priceUpdate) internal returns (uint256 klayAmountInUsd) {
         uint256 klayPrice = getPrice(feedId, priceFeed, priceUpdate);
         klayAmountInUsd = (klayPrice * klayAmount) / 1e18;
         // the actual KLAY/USD conversation rate, after adjusting the extra 0s to be in wei unit.

@@ -3,7 +3,7 @@
 
 ## PriceFeedManager 
 
-### Fetch all tokens price feed address from the price feed address manager contract without leaving your deevelopment environment
+### Fetch Orakl tokens price feed address from the price feed address manager contract without leaving your deevelopment environment
 
 {
   "ADA-KRW"
