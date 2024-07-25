@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 // A price feed address manager to fetch the price feed address of token pairs on the ORAKL NETWORK.
+// Contract Address on CYPRESS NETWORK = 0x6BbE47610d1e247C2aEAb592FF465Bf9c3B22443
 contract PriceFeedManager {
 
     struct FeedAddresses {

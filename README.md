@@ -2,6 +2,8 @@
 > Quickly bootstrap your development on Kaia
 
 ## PriceFeedManager 
+> Contract Address on CYPRESS NETWORK = 0x6BbE47610d1e247C2aEAb592FF465Bf9c3B22443
+
 
 ### Fetch Orakl tokens price feed address from the price feed address manager contract without leaving your deevelopment environment
 
