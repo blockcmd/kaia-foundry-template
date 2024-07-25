@@ -3,7 +3,6 @@
 pragma solidity ^0.8.19;
 
 import { IFeedProxy } from "lib/orakl/contracts/v0.2/src/interfaces/IFeedProxy.sol";
-
 /// @title LuckyDraw
 /// @author BlockCMD
 /// @notice A price converter library that convert KLAY to USD amount
