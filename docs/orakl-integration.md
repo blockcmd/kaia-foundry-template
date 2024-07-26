@@ -13,3 +13,5 @@ orakl/=lib/orakl/
 ```
 
 ## Usage
+You can review the 2 files `LuckyDraw.sol` and `PriceConverter.sol` to see Orakl Network implementations.
+
